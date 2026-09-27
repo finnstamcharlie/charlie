@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ÖB Tidningen</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  background: #f4f1e8;
+  color: #171717;
+  overflow-x: hidden;
+}
+
+/* TOPP */
+
+.topbar {
+  background: #111;
+  color: white;
+  text-align: center;
+  padding: 7px;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+}
+
+header {
+  background: #fff;
+  border-bottom: 5px solid #111;
+  padding: 22px 15px 18px;
+  text-align: center;
+}
+
+.logo {
+  font-size: clamp(42px, 8vw, 82px);
+  font-weight: bold;
+  letter-spacing: -4px;
+  margin: 0;
+}
+
+.logo span {
+  color: #c40000;
+}
+
+.subtitle {
+  font-family: Arial, sans-serif;
+  margin-top: 5px;
+  color: #555;
+  font-size: 15px;
+}
+
+/* NAV */
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #111;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 55px;
+  box-shadow: 0 3px 12px rgba(0,0,0,.25);
+}
+
+.nav button {
+  background: none;
+  border: 0;
+  color: white;
+  padding: 16px 20px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.nav button:hover {
+  background: #c40000;
+}
+
+.menuButton {
+  position: absolute;
+  left: 10px;
+  font-size: 24px !important;
+}
+
+/* MENY */
+
+.sideMenu {
+  position: fixed;
+  z-index: 300;
+  top: 0;
+  left: -330px;
+  width: 310px;
+  max-width: 90%;
+  height: 100%;
+  background: white;
+  box-shadow: 5px 0 20px rgba(0,0,0,.3);
+  transition: left .25s ease;
+  padding: 25px;
+  overflow-y: auto;
+}
+
+.sideMenu.open {
+  left: 0;
+}
+
+.sideMenu h2 {
+  margin-top: 0;
+  font-size: 30px;
+  border-bottom: 3px solid #111;
+  padding-bottom: 12px;
+}
+
+.sideMenu button {
+  width: 100%;
+  text-align: left;
+  background: #f1f1f1;
+  border: 0;
+  margin: 5px 0;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.sideMenu button:hover {
+  background: #ddd;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  z-index: 250;
+  inset: 0;
+  background: rgba(0,0,0,.5);
+}
+
+.overlay.show {
+  display: block;
+}
+
+/* HUVUD */
+
+.container {
+  max-width: 1150px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* SÖK */
+
+.searchArea {
+  display: flex;
+  gap: 10px;
+  margin: 5px 0 25px;
+}
+
+.searchArea input {
+  flex: 1;
+  padding: 15px 18px;
+  border: 2px solid #222;
+  border-radius: 30px;
+  font-size: 17px;
+  outline: none;
+}
+
+.searchArea button {
+  border: none;
+  border-radius: 50%;
+  width: 52px;
+  height: 52px;
+  background: #c40000;
+  color: white;
+  font-size: 21px;
+  cursor: pointer;
+}
+
+/* NYHET */
+
+.breaking {
+  background: #c40000;
+  color: white;
+  padding: 11px 15px;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* HUVUDARTIKEL */
+
+.hero {
+  background: white;
+  border: 1px solid #ddd;
+  box-shadow: 0 5px 18px rgba(0,0,0,.08);
+  padding: 30px;
+  margin-bottom: 25px;
+}
+
+.hero h2 {
+  font-size: clamp(30px, 6vw, 55px);
+  line-height: 1;
+  margin: 0 0 15px;
+  overflow-wrap: anywhere;
+}
+
+.hero p {
+  font-family: Arial, sans-serif;
+  color: #555;
+  font-size: 17px;
+}
+
+/* KATEGORIER */
+
+.categories {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 12px;
+}
+
+.category {
+  flex-shrink: 0;
+  border: 1px solid #222;
+  background: white;
+  border-radius: 20px;
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+.category:hover {
+  background: #111;
+  color: white;
+}
+
+/* ARTIKLAR */
+
+.sectionTitle {
+  border-bottom: 4px solid #111;
+  padding-bottom: 8px;
+  margin-top: 30px;
+}
+
+.articles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.article {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 20px;
+  cursor: pointer;
+  transition: transform .15s, box-shadow .15s;
+}
+
+.article:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 20px rgba(0,0,0,.12);
+}
+
+.article .categoryLabel {
+  color: #c40000;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.article h3 {
+  font-size: 25px;
+  margin: 8px 0;
+  line-height: 1.05;
+  overflow-wrap: anywhere;
+}
+
+.article p {
+  font-family: Arial, sans-serif;
+  color: #555;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.articleDate {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  color: #888;
+}
+
+/* ARTIKELVISNING */
+
+.fullArticle {
+  background: white;
+  padding: 35px;
+  box-shadow: 0 5px 20px rgba(0,0,0,.08);
+}
+
+.fullArticle h1 {
+  font-size: clamp(35px, 7vw, 65px);
+  line-height: 1;
+  margin-top: 0;
+  overflow-wrap: anywhere;
+}
+
+.fullArticleText {
+  font-family: Arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* MODAL */
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 500;
+  inset: 0;
+  background: rgba(0,0,0,.65);
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.modal.show {
+  display: flex;
+}
+
+.box {
+  width: 100%;
+  max-width: 650px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+}
+
+.box h2 {
+  margin-top: 0;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 13px;
+  margin: 7px 0 14px;
+  border: 1px solid #aaa;
+  border-radius: 7px;
+  font-size: 16px;
+}
+
+textarea {
+  min-height: 220px;
+  resize: vertical;
+}
+
+.primary {
+  background: #c40000;
+  color: white;
+  border: none;
+  padding: 13px 20px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.secondary {
+  background: #ddd;
+  border: none;
+  padding: 13px 20px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.deleteArticleButton {
+  width: 100%;
+  text-align: left;
+  padding: 13px;
+  margin: 5px 0;
+  border: 0;
+  border-radius: 7px;
+  background: #ffe5e5;
+  cursor: pointer;
+}
+
+.deleteArticleButton:hover {
+  background: #ffcccc;
+}
+
+/* FOOTER */
+
+footer {
+  margin-top: 50px;
+  background: #111;
+  color: white;
+  text-align: center;
+  padding: 35px 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* MOBIL */
+
+@media (max-width: 750px) {
+
+  .articles {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding: 22px;
+  }
+
+  .fullArticle {
+    padding: 22px;
+  }
+
+  .nav button:not(.menuButton) {
+    display: none;
+  }
+
+  .logo {
+    letter-spacing: -2px;
+  }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+  📰 ÖB Tidningen • Lokala nyheter och annat kul
+</div>
+
+<header>
+  <h1 class="logo">ÖB <span>Tidningen</span></h1>
+  <div class="subtitle">
+    NYHETER • SPORT • KUL • LOKALT
+  </div>
+</header>
+
+<!-- NAVIGATION -->
+
+<nav class="nav">
+
+  <button class="menuButton" onclick="openMenu()">
+    ☰
+  </button>
+
+  <button onclick="showHome()">Hem</button>
+  <button onclick="searchFocus()">Sök</button>
+  <button onclick="openAdd()">✍️ Skriv artikel</button>
+
+</nav>
+
+
+<!-- MENY -->
+
+<div class="overlay" id="overlay" onclick="closeMenu()"></div>
+
+<div class="sideMenu" id="sideMenu">
+
+  <h2>☰ Meny</h2>
+
+  <button onclick="showHome(); closeMenu();">
+    🏠 Startsida
+  </button>
+
+  <button onclick="searchFocus(); closeMenu();">
+    🔎 Sök artiklar
+  </button>
+
+  <button onclick="openAdd(); closeMenu();">
+    ✍️ Skriv artikel
+  </button>
+
+  <button onclick="openDelete(); closeMenu();">
+    🗑️ Radera artikel
+  </button>
+
+  <hr>
+
+  <h3>Kategorier</h3>
+
+  <button onclick="filterCategory('Alla'); closeMenu();">
+    📰 Alla artiklar
+  </button>
+
+  <button onclick="filterCategory('Lokalt'); closeMenu();">
+    📍 Lokalt
+  </button>
+
+  <button onclick="filterCategory('Sport'); closeMenu();">
+    ⚽ Sport
+  </button>
+
+  <button onclick="filterCategory('Kul'); closeMenu();">
+    😄 Kul
+  </button>
+
+  <button onclick="filterCategory('Övrigt'); closeMenu();">
+    📚 Övrigt
+  </button>
+
+</div>
+
+
+<main class="container">
+
+  <!-- SÖK -->
+
+  <div class="searchArea" id="searchArea">
+
+    <input
+      id="searchInput"
+      type="search"
+      placeholder="🔎 Sök efter en artikel..."
+      oninput="searchArticles()"
+    >
+
+    <button onclick="searchArticles()">
+      🔎
+    </button>
+
+  </div>
+
+
+  <div class="breaking">
+    🔴 SENASTE NYTT
+  </div>
+
+
+  <!-- INNEHÅLL -->
+
+  <div id="content"></div>
+
+</main>
+
+
+<footer>
+  <strong>ÖB Tidningen</strong>
+  <br><br>
+  Din tidning på nätet
+  <br><br>
+  © 2026 ÖB Tidningen
+</footer>
+
+
+<!-- SKRIV ARTIKEL -->
+
+<div class="modal" id="addModal">
+
+  <div class="box">
+
+    <h2>✍️ Skriv artikel</h2>
+
+    <label>Kod</label>
+
+    <input
+      id="addCode"
+      type="password"
+      placeholder="Skriv koden"
+    >
+
+    <div id="articleForm" style="display:none">
+
+      <label>Rubrik</label>
+
+      <input
+        id="title"
+        type="text"
+        placeholder="Skriv rubriken..."
+      >
+
+      <label>Kategori</label>
+
+      <select id="category">
+
+        <option value="Lokalt">
+          📍 Lokalt
+        </option>
+
+        <option value="Sport">
+          ⚽ Sport
+        </option>
+
+        <option value="Kul">
+          😄 Kul
+        </option>
+
+        <option value="Övrigt">
+          📚 Övrigt
+        </option>
+
+      </select>
+
+      <label>Artikel</label>
+
+      <textarea
+        id="text"
+        placeholder="Skriv artikeln..."
+      ></textarea>
+
+      <button class="primary" onclick="saveArticle()">
+        📰 Publicera
+      </button>
+
+    </div>
+
+    <button class="secondary" onclick="closeModals()">
+      Stäng
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- RADERA -->
+
+<div class="modal" id="deleteModal">
+
+  <div class="box">
+
+    <h2>🗑️ Radera artikel</h2>
+
+    <input
+      id="deleteCode"
+      type="password"
+      placeholder="Raderingskod"
+    >
+
+    <button class="primary" onclick="checkDeleteCode()">
+      Fortsätt
+    </button>
+
+    <div id="deleteList"></div>
+
+    <button class="secondary" onclick="closeModals()">
+      Stäng
+    </button>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* ================================
+   INSTÄLLNINGAR
+================================ */
+
+const ADD_CODE = "1717";
+const DELETE_CODE = "2121";
+
+const STORAGE_KEY = "obTidningenArticles";
+
+
+/* ================================
+   DATA
+================================ */
+
+function getArticles() {
+
+  return JSON.parse(
+    localStorage.getItem(STORAGE_KEY) || "[]"
+  );
+
+}
+
+
+function saveArticles(articles) {
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(articles)
+  );
+
+}
+
+
+/* ================================
+   SÄKER TEXT
+================================ */
+
+function escapeHTML(text) {
+
+  const div = document.createElement("div");
+
+  div.textContent = text;
+
+  return div.innerHTML;
+
+}
+
+
+/* ================================
+   STARTSIDA
+================================ */
+
+function showHome() {
+
+  document.getElementById("searchInput").value = "";
+
+  renderArticles(getArticles());
+
+}
+
+
+/* ================================
+   VISA ARTIKLAR
+================================ */
+
+function renderArticles(articles) {
+
+  const content =
+    document.getElementById("content");
+
+  content.innerHTML = "";
+
+
+  if (articles.length === 0) {
+
+    content.innerHTML = `
+      <div class="hero">
+        <h2>Inga artiklar hittades</h2>
+        <p>
+          Det finns inga artiklar som matchar din sökning.
+        </p>
+      </div>
+    `;
+
+    return;
+  }
+
+
+  const latest = articles[articles.length - 1];
+
+
+  /* HUVUDARTIKEL */
+
+  content.innerHTML = `
+
+    <section class="hero"
+      onclick="openArticle(${latest.id})"
+      style="cursor:pointer">
+
+      <div style="
+        color:#c40000;
+        font-family:Arial;
+        font-weight:bold;
+        margin-bottom:10px;
+      ">
+        ${escapeHTML(latest.category)}
+      </div>
+
+      <h2>
+        ${escapeHTML(latest.title)}
+      </h2>
+
+      <p>
+        ${escapeHTML(latest.text).substring(0, 220)}
+        ${latest.text.length > 220 ? "..." : ""}
+      </p>
+
+      <small>
+        Läs hela artikeln →
+      </small>
+
+    </section>
+
+    <h2 class="sectionTitle">
+      Senaste artiklar
+    </h2>
+
+    <div class="articles" id="articleGrid"></div>
+  `;
+
+
+  const grid =
+    document.getElementById("articleGrid");
+
+
+  articles
+    .slice()
+    .reverse()
+    .forEach(article => {
+
+      const card =
+        document.createElement("article");
+
+      card.className = "article";
+
+      card.onclick =
+        () => openArticle(article.id);
+
+
+      card.innerHTML = `
+
+        <div class="categoryLabel">
+          ${escapeHTML(article.category)}
+        </div>
+
+        <h3>
+          ${escapeHTML(article.title)}
+        </h3>
+
+        <p>
+          ${escapeHTML(article.text).substring(0, 150)}
+          ${article.text.length > 150 ? "..." : ""}
+        </p>
+
+        <div class="articleDate">
+          ${escapeHTML(article.date)}
+        </div>
+
+      `;
+
+
+      grid.appendChild(card);
+
+    });
+
+}
+
+
+/* ================================
+   ÖPPNA ARTIKEL
+================================ */
+
+function openArticle(id) {
+
+  const articles = getArticles();
+
+  const article =
+    articles.find(a => a.id === id);
+
+
+  if (!article) return;
+
+
+  const content =
+    document.getElementById("content");
+
+
+  content.innerHTML = `
+
+    <article class="fullArticle">
+
+      <div style="
+        color:#c40000;
+        font-family:Arial;
+        font-weight:bold;
+        margin-bottom:10px;
+      ">
+        ${escapeHTML(article.category)}
+      </div>
+
+      <h1>
+        ${escapeHTML(article.title)}
+      </h1>
+
+      <div style="
+        color:#777;
+        font-family:Arial;
+        margin-bottom:25px;
+      ">
+        ${escapeHTML(article.date)}
+      </div>
+
+      <div class="fullArticleText">
+        ${escapeHTML(article.text)}
+      </div>
+
+      <br><br>
+
+      <button
+        class="primary"
+        onclick="showHome()"
+      >
+        ← Tillbaka
+      </button>
+
+    </article>
+  `;
+
+}
+
+
+/* ================================
+   SÖK
+================================ */
+
+function searchArticles() {
+
+  const query =
+    document.getElementById(
+      "searchInput"
+    ).value
+      .trim()
+      .toLowerCase();
+
+
+  const articles = getArticles();
+
+
+  if (!query) {
+
+    renderArticles(articles);
+
+    return;
+  }
+
+
+  const results =
+    articles.filter(article =>
+
+      article.title
+        .toLowerCase()
+        .includes(query)
+
+      ||
+
+      article.text
+        .toLowerCase()
+        .includes(query)
+
+      ||
+
+      article.category
+        .toLowerCase()
+        .includes(query)
+
+    );
+
+
+  renderArticles(results);
+
+}
+
+
+function searchFocus() {
+
+  document.getElementById(
+    "searchInput"
+  ).focus();
+
+}
+
+
+/* ================================
+   KATEGORI
+================================ */
+
+function filterCategory(category) {
+
+  const articles = getArticles();
+
+
+  if (category === "Alla") {
+
+    renderArticles(articles);
+
+    return;
+  }
+
+
+  const filtered =
+    articles.filter(
+      article =>
+        article.category === category
+    );
+
+
+  renderArticles(filtered);
+
+}
+
+
+/* ================================
+   MENY
+================================ */
+
+function openMenu() {
+
+  document
+    .getElementById("sideMenu")
+    .classList.add("open");
+
+
+  document
+    .getElementById("overlay")
+    .classList.add("show");
+
+}
+
+
+function closeMenu() {
+
+  document
+    .getElementById("sideMenu")
+    .classList.remove("open");
+
+
+  document
+    .getElementById("overlay")
+    .classList.remove("show");
+
+}
+
+
+/* ================================
+   SKRIV ARTIKEL
+================================ */
+
+function openAdd() {
+
+  document
+    .getElementById("addModal")
+    .classList.add("show");
+
+
+  document
+    .getElementById("addCode")
+    .value = "";
+
+
+  document
+    .getElementById("articleForm")
+    .style.display = "none";
+
+}
+
+
+document
+  .getElementById("addCode")
+  .addEventListener(
+    "input",
+    function() {
+
+      document
+        .getElementById("articleForm")
+        .style.display =
+          this.value === ADD_CODE
+            ? "block"
+            : "none";
+
+    }
+  );
+
+
+/* ================================
+   SPARA ARTIKEL
+================================ */
+
+function saveArticle() {
+
+  const title =
+    document
+      .getElementById("title")
+      .value
+      .trim();
+
+
+  const text =
+    document
+      .getElementById("text")
+      .value
+      .trim();
+
+
+  const category =
+    document
+      .getElementById("category")
+      .value;
+
+
+  if (!title || !text) {
+
+    alert(
+      "Skriv både rubrik och artikel!"
+    );
+
+    return;
+  }
+
+
+  const articles = getArticles();
+
+
+  articles.push({
+
+    id: Date.now(),
+
+    title: title,
+
+    text: text,
+
+    category: category,
+
+    date:
+      new Date()
+        .toLocaleString("sv-SE")
+
+  });
+
+
+  saveArticles(articles);
+
+
+  document
+    .getElementById("title")
+    .value = "";
+
+
+  document
+    .getElementById("text")
+    .value = "";
+
+
+  closeModals();
+
+  showHome();
+
+
+  alert(
+    "📰 Artikeln är publicerad!"
+  );
+
+}
+
+
+/* ================================
+   RADERA
+================================ */
+
+function openDelete() {
+
+  document
+    .getElementById("deleteModal")
+    .classList.add("show");
+
+
+  document
+    .getElementById("deleteCode")
+    .value = "";
+
+
+  document
+    .getElementById("deleteList")
+    .innerHTML = "";
+
+}
+
+
+function checkDeleteCode() {
+
+  const code =
+    document
+      .getElementById("deleteCode")
+      .value;
+
+
+  if (code !== DELETE_CODE) {
+
+    alert("❌ Fel kod!");
+
+    return;
+  }
+
+
+  showDeleteList();
+
+}
+
+
+function showDeleteList() {
+
+  const list =
+    document
+      .getElementById("deleteList");
+
+
+  const articles =
+    getArticles();
+
+
+  if (articles.length === 0) {
+
+    list.innerHTML =
+      "<p>Det finns inga artiklar.</p>";
+
+    return;
+  }
+
+
+  list.innerHTML =
+    "<h3>Välj artikel:</h3>";
+
+
+  articles
+    .slice()
+    .reverse()
+    .forEach(article => {
+
+      const button =
+        document.createElement("button");
+
+
+      button.className =
+        "deleteArticleButton";
+
+
+      button.textContent =
+        "🗑️ " + article.title;
+
+
+      button.onclick =
+        () => deleteArticle(article.id);
+
+
+      list.appendChild(button);
+
+    });
+
+}
+
+
+function deleteArticle(id) {
+
+  if (
+    !confirm(
+      "Vill du verkligen radera artikeln?"
+    )
+  ) {
+
+    return;
+
+  }
+
+
+  const articles =
+    getArticles();
+
+
+  const newArticles =
+    articles.filter(
+      article => article.id !== id
+    );
+
+
+  saveArticles(newArticles);
+
+
+  showDeleteList();
+
+  showHome();
+
+
+  alert(
+    "🗑️ Artikeln är raderad!"
+  );
+
+}
+
+
+/* ================================
+   STÄNG
+================================ */
+
+function closeModals() {
+
+  document
+    .getElementById("addModal")
+    .classList.remove("show");
+
+
+  document
+    .getElementById("deleteModal")
+    .classList.remove("show");
+
+}
+
+
+/* ================================
+   START
+================================ */
+
+showHome();
+
+</script>
+
+</body>
+</html>
