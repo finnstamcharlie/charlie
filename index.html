@@ -3,438 +3,456 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ÖB Tidningen</title>
+<title>Charlie Svensk</title>
 
 <style>
 * {
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
   margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
-  background: #f4f1e8;
-  color: #171717;
-  overflow-x: hidden;
-}
-
-/* TOPP */
-
-.topbar {
-  background: #111;
-  color: white;
-  text-align: center;
-  padding: 7px;
   font-family: Arial, sans-serif;
-  font-size: 13px;
+  background: #f4f6f8;
+  color: #222;
 }
 
-header {
-  background: #fff;
-  border-bottom: 5px solid #111;
-  padding: 22px 15px 18px;
-  text-align: center;
-}
-
-.logo {
-  font-size: clamp(42px, 8vw, 82px);
-  font-weight: bold;
-  letter-spacing: -4px;
-  margin: 0;
-}
-
-.logo span {
-  color: #c40000;
-}
-
-.subtitle {
-  font-family: Arial, sans-serif;
-  margin-top: 5px;
-  color: #555;
-  font-size: 15px;
-}
-
-/* NAV */
-
-.nav {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: #111;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 55px;
-  box-shadow: 0 3px 12px rgba(0,0,0,.25);
-}
-
-.nav button {
-  background: none;
-  border: 0;
-  color: white;
-  padding: 16px 20px;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 15px;
-}
-
-.nav button:hover {
-  background: #c40000;
-}
-
-.menuButton {
-  position: absolute;
-  left: 10px;
-  font-size: 24px !important;
-}
-
-/* MENY */
-
-.sideMenu {
-  position: fixed;
-  z-index: 300;
-  top: 0;
-  left: -330px;
-  width: 310px;
-  max-width: 90%;
-  height: 100%;
-  background: white;
-  box-shadow: 5px 0 20px rgba(0,0,0,.3);
-  transition: left .25s ease;
-  padding: 25px;
-  overflow-y: auto;
-}
-
-.sideMenu.open {
-  left: 0;
-}
-
-.sideMenu h2 {
-  margin-top: 0;
-  font-size: 30px;
-  border-bottom: 3px solid #111;
-  padding-bottom: 12px;
-}
-
-.sideMenu button {
-  width: 100%;
-  text-align: left;
-  background: #f1f1f1;
-  border: 0;
-  margin: 5px 0;
-  padding: 15px;
-  border-radius: 8px;
-  font-size: 16px;
+button {
   cursor: pointer;
 }
 
-.sideMenu button:hover {
-  background: #ddd;
-}
-
-.overlay {
+.page {
   display: none;
-  position: fixed;
-  z-index: 250;
-  inset: 0;
-  background: rgba(0,0,0,.5);
+  min-height: 100vh;
 }
 
-.overlay.show {
+.page.active {
   display: block;
 }
 
-/* HUVUD */
+/* =========================
+   STARTSIDA
+========================= */
 
-.container {
-  max-width: 1150px;
+.start-header {
+  background: linear-gradient(135deg, #111827, #374151);
+  color: white;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.start-header h1 {
+  font-size: 48px;
+  margin: 0 0 10px;
+}
+
+.start-header p {
+  font-size: 20px;
+  margin: 0;
+}
+
+.apps {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 25px;
+}
+
+.app-card {
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(0,0,0,.08);
+  transition: .2s;
+  cursor: pointer;
+}
+
+.app-card:hover {
+  transform: translateY(-5px);
+}
+
+.app-icon {
+  font-size: 70px;
+}
+
+.app-card h2 {
+  margin: 15px 0 8px;
+}
+
+.app-card p {
+  color: #666;
+}
+
+/* =========================
+   ÖB TIDNINGEN
+========================= */
+
+.ob-header {
+  background: #111827;
+  color: white;
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.ob-header h1 {
+  margin: 0;
+  font-size: 42px;
+}
+
+.ob-header p {
+  margin: 8px 0 0;
+}
+
+.ob-nav {
+  background: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.1);
+}
+
+.ob-nav button {
+  border: none;
+  background: #eee;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.ob-nav button:hover {
+  background: #ddd;
+}
+
+.ob-container {
+  max-width: 1000px;
   margin: auto;
   padding: 20px;
 }
 
-/* SÖK */
-
-.searchArea {
+.ob-tools {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
-  margin: 5px 0 25px;
-}
-
-.searchArea input {
-  flex: 1;
-  padding: 15px 18px;
-  border: 2px solid #222;
-  border-radius: 30px;
-  font-size: 17px;
-  outline: none;
-}
-
-.searchArea button {
-  border: none;
-  border-radius: 50%;
-  width: 52px;
-  height: 52px;
-  background: #c40000;
-  color: white;
-  font-size: 21px;
-  cursor: pointer;
-}
-
-/* NYHET */
-
-.breaking {
-  background: #c40000;
-  color: white;
-  padding: 11px 15px;
-  font-family: Arial, sans-serif;
-  font-weight: bold;
   margin-bottom: 20px;
 }
 
-/* HUVUDARTIKEL */
-
-.hero {
-  background: white;
-  border: 1px solid #ddd;
-  box-shadow: 0 5px 18px rgba(0,0,0,.08);
-  padding: 30px;
-  margin-bottom: 25px;
-}
-
-.hero h2 {
-  font-size: clamp(30px, 6vw, 55px);
-  line-height: 1;
-  margin: 0 0 15px;
-  overflow-wrap: anywhere;
-}
-
-.hero p {
-  font-family: Arial, sans-serif;
-  color: #555;
-  font-size: 17px;
-}
-
-/* KATEGORIER */
-
-.categories {
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  padding-bottom: 12px;
-}
-
-.category {
-  flex-shrink: 0;
-  border: 1px solid #222;
-  background: white;
-  border-radius: 20px;
-  padding: 8px 15px;
-  cursor: pointer;
-}
-
-.category:hover {
-  background: #111;
+.ob-tools button {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 10px;
+  background: #111827;
   color: white;
 }
 
-/* ARTIKLAR */
-
-.sectionTitle {
-  border-bottom: 4px solid #111;
-  padding-bottom: 8px;
-  margin-top: 30px;
+.search-box {
+  display: none;
+  margin-bottom: 20px;
 }
 
-.articles {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+.search-box.active {
+  display: block;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
 }
 
 .article {
   background: white;
-  border: 1px solid #ddd;
-  padding: 20px;
-  cursor: pointer;
-  transition: transform .15s, box-shadow .15s;
+  padding: 22px;
+  border-radius: 15px;
+  margin-bottom: 18px;
+  box-shadow: 0 3px 12px rgba(0,0,0,.07);
 }
 
-.article:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 7px 20px rgba(0,0,0,.12);
+.article-category {
+  display: inline-block;
+  background: #e5e7eb;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+  margin-bottom: 8px;
 }
 
-.article .categoryLabel {
-  color: #c40000;
-  font-family: Arial, sans-serif;
-  font-weight: bold;
-  font-size: 12px;
-  text-transform: uppercase;
-}
-
-.article h3 {
-  font-size: 25px;
-  margin: 8px 0;
-  line-height: 1.05;
-  overflow-wrap: anywhere;
+.article h2 {
+  margin: 5px 0 10px;
+  word-break: break-word;
 }
 
 .article p {
-  font-family: Arial, sans-serif;
-  color: #555;
-  line-height: 1.5;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-}
-
-.articleDate {
-  font-family: Arial, sans-serif;
-  font-size: 12px;
-  color: #888;
-}
-
-/* ARTIKELVISNING */
-
-.fullArticle {
-  background: white;
-  padding: 35px;
-  box-shadow: 0 5px 20px rgba(0,0,0,.08);
-}
-
-.fullArticle h1 {
-  font-size: clamp(35px, 7vw, 65px);
-  line-height: 1;
-  margin-top: 0;
-  overflow-wrap: anywhere;
-}
-
-.fullArticleText {
-  font-family: Arial, sans-serif;
-  font-size: 18px;
-  line-height: 1.7;
+  line-height: 1.6;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
-  word-break: break-word;
 }
 
-/* MODAL */
+.article-info {
+  color: #777;
+  font-size: 13px;
+  margin-top: 15px;
+}
+
+.empty {
+  background: white;
+  padding: 30px;
+  text-align: center;
+  border-radius: 15px;
+}
+
+/* =========================
+   MODAL
+========================= */
 
 .modal {
   display: none;
   position: fixed;
-  z-index: 500;
   inset: 0;
-  background: rgba(0,0,0,.65);
-  justify-content: center;
-  align-items: center;
+  background: rgba(0,0,0,.6);
+  z-index: 100;
   padding: 20px;
-}
-
-.modal.show {
-  display: flex;
-}
-
-.box {
-  width: 100%;
-  max-width: 650px;
-  max-height: 90vh;
   overflow-y: auto;
-  background: white;
-  border-radius: 15px;
-  padding: 25px;
 }
 
-.box h2 {
+.modal.active {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.modal-box {
+  background: white;
+  width: 100%;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 25px;
+  border-radius: 18px;
+}
+
+.modal-box h2 {
   margin-top: 0;
 }
 
-input,
-textarea,
-select {
+.modal-box input,
+.modal-box textarea,
+.modal-box select {
   width: 100%;
   padding: 13px;
-  margin: 7px 0 14px;
-  border: 1px solid #aaa;
-  border-radius: 7px;
+  margin: 7px 0 15px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
   font-size: 16px;
 }
 
-textarea {
-  min-height: 220px;
+.modal-box textarea {
+  min-height: 180px;
   resize: vertical;
 }
 
-.primary {
-  background: #c40000;
-  color: white;
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.modal-buttons button {
+  padding: 12px 18px;
   border: none;
-  padding: 13px 20px;
-  border-radius: 7px;
-  cursor: pointer;
+  border-radius: 10px;
+}
+
+.primary {
+  background: #111827;
+  color: white;
+}
+
+.cancel {
+  background: #ddd;
+}
+
+/* =========================
+   CODE MANAGEMENT
+========================= */
+
+.code-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background: #f1f1f1;
+  border-radius: 10px;
+  margin-bottom: 8px;
+}
+
+.code-row button {
+  border: none;
+  background: #ddd;
+  padding: 7px 10px;
+  border-radius: 8px;
+}
+
+/* =========================
+   WHEEL
+========================= */
+
+.wheel-container {
+  max-width: 900px;
+  margin: auto;
+  padding: 25px 20px;
+  text-align: center;
+}
+
+.wheel-header {
+  margin-bottom: 20px;
+}
+
+.wheel-header h1 {
+  margin-bottom: 5px;
+}
+
+.wheel-header p {
+  color: #666;
+}
+
+.wheel-area {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#wheelCanvas {
+  width: min(500px, 90vw);
+  height: min(500px, 90vw);
+  border-radius: 50%;
+}
+
+.wheel-pointer {
+  position: absolute;
+  top: -8px;
+  z-index: 5;
+  font-size: 45px;
+  line-height: 1;
+}
+
+#spinButton {
+  margin-top: 20px;
+  padding: 16px 45px;
+  border: none;
+  border-radius: 15px;
+  background: #111827;
+  color: white;
+  font-size: 22px;
   font-weight: bold;
 }
 
-.secondary {
-  background: #ddd;
-  border: none;
-  padding: 13px 20px;
-  border-radius: 7px;
-  cursor: pointer;
+#spinButton:disabled {
+  opacity: .5;
 }
 
-.deleteArticleButton {
-  width: 100%;
-  text-align: left;
+#wheelResult {
+  margin-top: 20px;
+  padding: 15px 25px;
+  border-radius: 12px;
+  background: white;
+  font-size: 22px;
+  font-weight: bold;
+  min-height: 30px;
+  box-shadow: 0 3px 12px rgba(0,0,0,.07);
+}
+
+.wheel-input-area {
+  max-width: 650px;
+  margin: 30px auto;
+  padding: 22px;
+  background: white;
+  border-radius: 18px;
+  box-shadow: 0 3px 12px rgba(0,0,0,.07);
+}
+
+.add-option {
+  display: flex;
+  gap: 10px;
+}
+
+.add-option input {
+  flex: 1;
   padding: 13px;
-  margin: 5px 0;
-  border: 0;
-  border-radius: 7px;
-  background: #ffe5e5;
-  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
 }
 
-.deleteArticleButton:hover {
-  background: #ffcccc;
-}
-
-/* FOOTER */
-
-footer {
-  margin-top: 50px;
-  background: #111;
+.add-option button {
+  padding: 13px 20px;
+  border: none;
+  border-radius: 10px;
+  background: #111827;
   color: white;
-  text-align: center;
-  padding: 35px 20px;
-  font-family: Arial, sans-serif;
 }
 
-/* MOBIL */
+#optionList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+}
 
-@media (max-width: 750px) {
+.option-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f3f4f6;
+  padding: 10px 14px;
+  border-radius: 10px;
+}
 
-  .articles {
-    grid-template-columns: 1fr;
+.option-item button {
+  border: none;
+  background: #ddd;
+  border-radius: 8px;
+  padding: 6px 10px;
+}
+
+.clear-wheel {
+  margin-top: 15px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 10px;
+  background: #eee;
+}
+
+.back-button {
+  margin: 20px 0;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  background: #ddd;
+}
+
+@media(max-width:600px) {
+
+  .start-header h1 {
+    font-size: 36px;
   }
 
-  .hero {
-    padding: 22px;
+  .ob-header h1 {
+    font-size: 32px;
   }
 
-  .fullArticle {
-    padding: 22px;
-  }
-
-  .nav button:not(.menuButton) {
-    display: none;
-  }
-
-  .logo {
-    letter-spacing: -2px;
+  .add-option {
+    flex-direction: column;
   }
 
 }
@@ -443,186 +461,256 @@ footer {
 
 <body>
 
-<div class="topbar">
-  📰 ÖB Tidningen • Lokala nyheter och annat kul
-</div>
+<!-- =====================================================
+     STARTSIDA
+===================================================== -->
 
-<header>
-  <h1 class="logo">ÖB <span>Tidningen</span></h1>
-  <div class="subtitle">
-    NYHETER • SPORT • KUL • LOKALT
-  </div>
-</header>
+<section id="startPage" class="page active">
 
-<!-- NAVIGATION -->
+  <header class="start-header">
+    <h1>Charlie Svensk</h1>
+    <p>Välkommen till mina projekt!</p>
+  </header>
 
-<nav class="nav">
+  <main class="apps">
 
-  <button class="menuButton" onclick="openMenu()">
-    ☰
-  </button>
+    <div class="app-card" onclick="openPage('obPage')">
+      <div class="app-icon">📰</div>
+      <h2>ÖB Tidningen</h2>
+      <p>Läs och skriv nyheter.</p>
+    </div>
 
-  <button onclick="showHome()">Hem</button>
-  <button onclick="searchFocus()">Sök</button>
-  <button onclick="openAdd()">✍️ Skriv artikel</button>
+    <div class="app-card" onclick="openPage('wheelPage')">
+      <div class="app-icon">🎡</div>
+      <h2>Spinning Wheel</h2>
+      <p>Skriv alternativ och låt hjulet välja!</p>
+    </div>
 
-</nav>
+  </main>
 
-
-<!-- MENY -->
-
-<div class="overlay" id="overlay" onclick="closeMenu()"></div>
-
-<div class="sideMenu" id="sideMenu">
-
-  <h2>☰ Meny</h2>
-
-  <button onclick="showHome(); closeMenu();">
-    🏠 Startsida
-  </button>
-
-  <button onclick="searchFocus(); closeMenu();">
-    🔎 Sök artiklar
-  </button>
-
-  <button onclick="openAdd(); closeMenu();">
-    ✍️ Skriv artikel
-  </button>
-
-  <button onclick="openDelete(); closeMenu();">
-    🗑️ Radera artikel
-  </button>
-
-  <hr>
-
-  <h3>Kategorier</h3>
-
-  <button onclick="filterCategory('Alla'); closeMenu();">
-    📰 Alla artiklar
-  </button>
-
-  <button onclick="filterCategory('Lokalt'); closeMenu();">
-    📍 Lokalt
-  </button>
-
-  <button onclick="filterCategory('Sport'); closeMenu();">
-    ⚽ Sport
-  </button>
-
-  <button onclick="filterCategory('Kul'); closeMenu();">
-    😄 Kul
-  </button>
-
-  <button onclick="filterCategory('Övrigt'); closeMenu();">
-    📚 Övrigt
-  </button>
-
-</div>
+</section>
 
 
-<main class="container">
+<!-- =====================================================
+     ÖB TIDNINGEN
+===================================================== -->
 
-  <!-- SÖK -->
+<section id="obPage" class="page">
 
-  <div class="searchArea" id="searchArea">
+  <header class="ob-header">
+    <h1>📰 ÖB Tidningen</h1>
+    <p>NYHETER • SPORT • KUL • LOKALT</p>
+  </header>
 
-    <input
-      id="searchInput"
-      type="search"
-      placeholder="🔎 Sök efter en artikel..."
-      oninput="searchArticles()"
-    >
+  <nav class="ob-nav">
+    <button onclick="showAllArticles()">Hem</button>
+    <button onclick="toggleSearch()">🔎 Sök</button>
+    <button onclick="openWriteModal()">✍️ Skriv artikel</button>
+    <button onclick="openDeleteModal()">🗑️ Radera</button>
+    <button onclick="openCodeManager()">🔐 Koder</button>
+    <button onclick="openPage('startPage')">🏠 Startsida</button>
+  </nav>
 
-    <button onclick="searchArticles()">
-      🔎
+  <main class="ob-container">
+
+    <div id="searchBox" class="search-box">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Sök efter artikel..."
+        oninput="renderArticles()"
+      >
+    </div>
+
+    <div id="articles"></div>
+
+  </main>
+
+</section>
+
+
+<!-- =====================================================
+     SPINNING WHEEL
+===================================================== -->
+
+<section id="wheelPage" class="page">
+
+  <div class="wheel-container">
+
+    <div class="wheel-header">
+      <h1>🎡 Spinning Wheel</h1>
+      <p>Låt hjulet välja åt dig!</p>
+    </div>
+
+    <div class="wheel-area">
+
+      <div class="wheel-pointer">▼</div>
+
+      <canvas
+        id="wheelCanvas"
+        width="500"
+        height="500">
+      </canvas>
+
+      <button
+        id="spinButton"
+        onclick="spinWheel()">
+        🎡 SPIN!
+      </button>
+
+      <div id="wheelResult">
+        Skriv in några alternativ och snurra!
+      </div>
+
+    </div>
+
+    <div class="wheel-input-area">
+
+      <h3>➕ Lägg till alternativ</h3>
+
+      <div class="add-option">
+
+        <input
+          type="text"
+          id="optionInput"
+          placeholder="T.ex. Minecraft"
+          maxlength="40"
+        >
+
+        <button onclick="addOption()">
+          Lägg till
+        </button>
+
+      </div>
+
+      <h3>📋 Dina alternativ</h3>
+
+      <div id="optionList"></div>
+
+      <button
+        class="clear-wheel"
+        onclick="clearOptions()">
+        🗑️ Ta bort alla
+      </button>
+
+    </div>
+
+    <button
+      class="back-button"
+      onclick="openPage('startPage')">
+      ← Till startsidan
     </button>
 
   </div>
 
-
-  <div class="breaking">
-    🔴 SENASTE NYTT
-  </div>
+</section>
 
 
-  <!-- INNEHÅLL -->
+<!-- =====================================================
+     SKRIV ARTIKEL
+===================================================== -->
 
-  <div id="content"></div>
+<div id="writeModal" class="modal">
 
-</main>
-
-
-<footer>
-  <strong>ÖB Tidningen</strong>
-  <br><br>
-  Din tidning på nätet
-  <br><br>
-  © 2026 ÖB Tidningen
-</footer>
-
-
-<!-- SKRIV ARTIKEL -->
-
-<div class="modal" id="addModal">
-
-  <div class="box">
+  <div class="modal-box">
 
     <h2>✍️ Skriv artikel</h2>
 
     <label>Kod</label>
 
     <input
-      id="addCode"
       type="password"
-      placeholder="Skriv koden"
+      id="writeCode"
+      placeholder="Skriv din kod"
     >
 
-    <div id="articleForm" style="display:none">
+    <label>Rubrik</label>
 
-      <label>Rubrik</label>
+    <input
+      type="text"
+      id="articleTitle"
+      placeholder="Rubrik"
+    >
 
-      <input
-        id="title"
-        type="text"
-        placeholder="Skriv rubriken..."
-      >
+    <label>Kategori</label>
 
-      <label>Kategori</label>
+    <select id="articleCategory">
 
-      <select id="category">
+      <option value="Lokalt">Lokalt</option>
+      <option value="Sport">Sport</option>
+      <option value="Kul">Kul</option>
+      <option value="Övrigt">Övrigt</option>
 
-        <option value="Lokalt">
-          📍 Lokalt
-        </option>
+    </select>
 
-        <option value="Sport">
-          ⚽ Sport
-        </option>
+    <label>Författare</label>
 
-        <option value="Kul">
-          😄 Kul
-        </option>
+    <input
+      type="text"
+      id="articleAuthor"
+      placeholder="Ditt namn"
+    >
 
-        <option value="Övrigt">
-          📚 Övrigt
-        </option>
+    <label>Text</label>
 
-      </select>
+    <textarea
+      id="articleText"
+      placeholder="Skriv artikeln här..."
+    ></textarea>
 
-      <label>Artikel</label>
+    <div class="modal-buttons">
 
-      <textarea
-        id="text"
-        placeholder="Skriv artikeln..."
-      ></textarea>
+      <button
+        class="primary"
+        onclick="saveArticle()">
+        Publicera
+      </button>
 
-      <button class="primary" onclick="saveArticle()">
-        📰 Publicera
+      <button
+        class="cancel"
+        onclick="closeModals()">
+        Avbryt
       </button>
 
     </div>
 
-    <button class="secondary" onclick="closeModals()">
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     RADERA ARTIKEL
+===================================================== -->
+
+<div id="deleteModal" class="modal">
+
+  <div class="modal-box">
+
+    <h2>🗑️ Radera artiklar</h2>
+
+    <label>Raderingskod</label>
+
+    <input
+      type="password"
+      id="deleteCode"
+      placeholder="Skriv kod"
+    >
+
+    <button
+      class="primary"
+      onclick="unlockDelete()">
+      Fortsätt
+    </button>
+
+    <div
+      id="deleteList"
+      style="margin-top:20px;">
+    </div>
+
+    <button
+      class="cancel"
+      onclick="closeModals()">
       Stäng
     </button>
 
@@ -631,27 +719,37 @@ footer {
 </div>
 
 
-<!-- RADERA -->
+<!-- =====================================================
+     KODHANTERING
+===================================================== -->
 
-<div class="modal" id="deleteModal">
+<div id="codeModal" class="modal">
 
-  <div class="box">
+  <div class="modal-box">
 
-    <h2>🗑️ Radera artikel</h2>
+    <h2>🔐 Kodhantering</h2>
+
+    <label>Admin-kod</label>
 
     <input
-      id="deleteCode"
       type="password"
-      placeholder="Raderingskod"
+      id="adminCode"
+      placeholder="Skriv admin-kod"
     >
 
-    <button class="primary" onclick="checkDeleteCode()">
-      Fortsätt
+    <button
+      class="primary"
+      onclick="unlockCodes()">
+      Logga in
     </button>
 
-    <div id="deleteList"></div>
+    <div id="codeManagerContent"></div>
 
-    <button class="secondary" onclick="closeModals()">
+    <br>
+
+    <button
+      class="cancel"
+      onclick="closeModals()">
       Stäng
     </button>
 
@@ -662,505 +760,347 @@ footer {
 
 <script>
 
-/* ================================
-   INSTÄLLNINGAR
-================================ */
+/* =====================================================
+   SIDOR
+===================================================== */
 
-const ADD_CODE = "1717";
-const DELETE_CODE = "2121";
+function openPage(pageId) {
 
-const STORAGE_KEY = "obTidningenArticles";
+  document
+    .querySelectorAll(".page")
+    .forEach(page => {
+      page.classList.remove("active");
+    });
 
+  const page =
+    document.getElementById(pageId);
 
-/* ================================
-   DATA
-================================ */
+  if (page) {
+    page.classList.add("active");
+  }
 
-function getArticles() {
+  window.scrollTo(0, 0);
 
-  return JSON.parse(
-    localStorage.getItem(STORAGE_KEY) || "[]"
-  );
-
+  if (pageId === "obPage") {
+    renderArticles();
+  }
 }
 
 
-function saveArticles(articles) {
+/* =====================================================
+   ÖB TIDNINGEN
+===================================================== */
+
+let articles =
+  JSON.parse(
+    localStorage.getItem("obTidningenArticles")
+  ) || [];
+
+
+let generatedCodes =
+  JSON.parse(
+    localStorage.getItem("obTidningenCodes")
+  ) || [];
+
+
+/*
+  Fasta koder:
+
+  1717 = skriva artikel
+  2121 = radera artikel
+  3434 = admin
+*/
+
+function saveArticles() {
 
   localStorage.setItem(
-    STORAGE_KEY,
+    "obTidningenArticles",
     JSON.stringify(articles)
   );
-
 }
 
 
-/* ================================
-   SÄKER TEXT
-================================ */
+function saveCodes() {
+
+  localStorage.setItem(
+    "obTidningenCodes",
+    JSON.stringify(generatedCodes)
+  );
+}
+
 
 function escapeHTML(text) {
 
-  const div = document.createElement("div");
+  const div =
+    document.createElement("div");
 
-  div.textContent = text;
+  div.textContent =
+    text ?? "";
 
   return div.innerHTML;
-
 }
 
 
-/* ================================
-   STARTSIDA
-================================ */
-
-function showHome() {
-
-  document.getElementById("searchInput").value = "";
-
-  renderArticles(getArticles());
-
-}
-
-
-/* ================================
+/* =====================================================
    VISA ARTIKLAR
-================================ */
+===================================================== */
 
-function renderArticles(articles) {
+function renderArticles() {
 
-  const content =
-    document.getElementById("content");
+  const container =
+    document.getElementById("articles");
 
-  content.innerHTML = "";
+  const search =
+    document
+      .getElementById("searchInput")
+      ?.value
+      .toLowerCase()
+      .trim() || "";
 
+  let filtered =
+    articles.filter(article => {
 
-  if (articles.length === 0) {
+      const title =
+        (article.title || "").toLowerCase();
 
-    content.innerHTML = `
-      <div class="hero">
-        <h2>Inga artiklar hittades</h2>
-        <p>
-          Det finns inga artiklar som matchar din sökning.
-        </p>
+      const text =
+        (article.text || "").toLowerCase();
+
+      const category =
+        (article.category || "").toLowerCase();
+
+      const author =
+        (article.author || "Okänd").toLowerCase();
+
+      return (
+        title.includes(search) ||
+        text.includes(search) ||
+        category.includes(search) ||
+        author.includes(search)
+      );
+
+    });
+
+  if (filtered.length === 0) {
+
+    container.innerHTML = `
+      <div class="empty">
+        <h2>📰 Inga artiklar</h2>
+        <p>Det finns inga artiklar att visa.</p>
       </div>
     `;
 
     return;
   }
 
+  container.innerHTML =
+    filtered
+      .slice()
+      .reverse()
+      .map(article => `
 
-  const latest = articles[articles.length - 1];
+        <article class="article">
 
+          <span class="article-category">
+            ${escapeHTML(article.category || "Övrigt")}
+          </span>
 
-  /* HUVUDARTIKEL */
+          <h2>
+            ${escapeHTML(article.title)}
+          </h2>
 
-  content.innerHTML = `
+          <p>
+            ${escapeHTML(article.text)}
+          </p>
 
-    <section class="hero"
-      onclick="openArticle(${latest.id})"
-      style="cursor:pointer">
+          <div class="article-info">
+            Skriven av:
+            ${escapeHTML(article.author || "Okänd")}
+            ${article.date ? " • " + escapeHTML(article.date) : ""}
+          </div>
 
-      <div style="
-        color:#c40000;
-        font-family:Arial;
-        font-weight:bold;
-        margin-bottom:10px;
-      ">
-        ${escapeHTML(latest.category)}
-      </div>
+        </article>
 
-      <h2>
-        ${escapeHTML(latest.title)}
-      </h2>
-
-      <p>
-        ${escapeHTML(latest.text).substring(0, 220)}
-        ${latest.text.length > 220 ? "..." : ""}
-      </p>
-
-      <small>
-        Läs hela artikeln →
-      </small>
-
-    </section>
-
-    <h2 class="sectionTitle">
-      Senaste artiklar
-    </h2>
-
-    <div class="articles" id="articleGrid"></div>
-  `;
-
-
-  const grid =
-    document.getElementById("articleGrid");
-
-
-  articles
-    .slice()
-    .reverse()
-    .forEach(article => {
-
-      const card =
-        document.createElement("article");
-
-      card.className = "article";
-
-      card.onclick =
-        () => openArticle(article.id);
-
-
-      card.innerHTML = `
-
-        <div class="categoryLabel">
-          ${escapeHTML(article.category)}
-        </div>
-
-        <h3>
-          ${escapeHTML(article.title)}
-        </h3>
-
-        <p>
-          ${escapeHTML(article.text).substring(0, 150)}
-          ${article.text.length > 150 ? "..." : ""}
-        </p>
-
-        <div class="articleDate">
-          ${escapeHTML(article.date)}
-        </div>
-
-      `;
-
-
-      grid.appendChild(card);
-
-    });
-
+      `)
+      .join("");
 }
 
 
-/* ================================
-   ÖPPNA ARTIKEL
-================================ */
-
-function openArticle(id) {
-
-  const articles = getArticles();
-
-  const article =
-    articles.find(a => a.id === id);
-
-
-  if (!article) return;
-
-
-  const content =
-    document.getElementById("content");
-
-
-  content.innerHTML = `
-
-    <article class="fullArticle">
-
-      <div style="
-        color:#c40000;
-        font-family:Arial;
-        font-weight:bold;
-        margin-bottom:10px;
-      ">
-        ${escapeHTML(article.category)}
-      </div>
-
-      <h1>
-        ${escapeHTML(article.title)}
-      </h1>
-
-      <div style="
-        color:#777;
-        font-family:Arial;
-        margin-bottom:25px;
-      ">
-        ${escapeHTML(article.date)}
-      </div>
-
-      <div class="fullArticleText">
-        ${escapeHTML(article.text)}
-      </div>
-
-      <br><br>
-
-      <button
-        class="primary"
-        onclick="showHome()"
-      >
-        ← Tillbaka
-      </button>
-
-    </article>
-  `;
-
-}
-
-
-/* ================================
-   SÖK
-================================ */
-
-function searchArticles() {
-
-  const query =
-    document.getElementById(
-      "searchInput"
-    ).value
-      .trim()
-      .toLowerCase();
-
-
-  const articles = getArticles();
-
-
-  if (!query) {
-
-    renderArticles(articles);
-
-    return;
-  }
-
-
-  const results =
-    articles.filter(article =>
-
-      article.title
-        .toLowerCase()
-        .includes(query)
-
-      ||
-
-      article.text
-        .toLowerCase()
-        .includes(query)
-
-      ||
-
-      article.category
-        .toLowerCase()
-        .includes(query)
-
-    );
-
-
-  renderArticles(results);
-
-}
-
-
-function searchFocus() {
-
-  document.getElementById(
-    "searchInput"
-  ).focus();
-
-}
-
-
-/* ================================
-   KATEGORI
-================================ */
-
-function filterCategory(category) {
-
-  const articles = getArticles();
-
-
-  if (category === "Alla") {
-
-    renderArticles(articles);
-
-    return;
-  }
-
-
-  const filtered =
-    articles.filter(
-      article =>
-        article.category === category
-    );
-
-
-  renderArticles(filtered);
-
-}
-
-
-/* ================================
-   MENY
-================================ */
-
-function openMenu() {
+function showAllArticles() {
 
   document
-    .getElementById("sideMenu")
-    .classList.add("open");
-
-
-  document
-    .getElementById("overlay")
-    .classList.add("show");
-
-}
-
-
-function closeMenu() {
-
-  document
-    .getElementById("sideMenu")
-    .classList.remove("open");
-
-
-  document
-    .getElementById("overlay")
-    .classList.remove("show");
-
-}
-
-
-/* ================================
-   SKRIV ARTIKEL
-================================ */
-
-function openAdd() {
-
-  document
-    .getElementById("addModal")
-    .classList.add("show");
-
-
-  document
-    .getElementById("addCode")
+    .getElementById("searchInput")
     .value = "";
 
-
-  document
-    .getElementById("articleForm")
-    .style.display = "none";
-
+  renderArticles();
 }
 
 
-document
-  .getElementById("addCode")
-  .addEventListener(
-    "input",
-    function() {
+/* =====================================================
+   SÖK
+===================================================== */
 
-      document
-        .getElementById("articleForm")
-        .style.display =
-          this.value === ADD_CODE
-            ? "block"
-            : "none";
+function toggleSearch() {
 
-    }
-  );
+  const box =
+    document.getElementById("searchBox");
+
+  box.classList.toggle("active");
+
+  if (box.classList.contains("active")) {
+
+    document
+      .getElementById("searchInput")
+      .focus();
+
+  }
+}
 
 
-/* ================================
-   SPARA ARTIKEL
-================================ */
+/* =====================================================
+   SKRIVA ARTIKEL
+===================================================== */
+
+function openWriteModal() {
+
+  document
+    .getElementById("writeModal")
+    .classList.add("active");
+
+}
+
 
 function saveArticle() {
 
+  const code =
+    document
+      .getElementById("writeCode")
+      .value
+      .trim();
+
   const title =
     document
-      .getElementById("title")
+      .getElementById("articleTitle")
       .value
       .trim();
-
-
-  const text =
-    document
-      .getElementById("text")
-      .value
-      .trim();
-
 
   const category =
     document
-      .getElementById("category")
+      .getElementById("articleCategory")
       .value;
+
+  const author =
+    document
+      .getElementById("articleAuthor")
+      .value
+      .trim();
+
+  const text =
+    document
+      .getElementById("articleText")
+      .value
+      .trim();
 
 
   if (!title || !text) {
 
-    alert(
-      "Skriv både rubrik och artikel!"
-    );
+    alert("Fyll i rubrik och text.");
 
     return;
   }
 
 
-  const articles = getArticles();
+  /*
+    1717 är den riktiga
+    skrivkoden men visas
+    aldrig på sidan.
+  */
+
+  let codeIndex = -1;
+
+  if (code !== "1717") {
+
+    codeIndex =
+      generatedCodes.findIndex(
+        item =>
+          item.code === code &&
+          item.usesLeft > 0
+      );
+
+    if (codeIndex === -1) {
+
+      alert("Fel kod.");
+
+      return;
+    }
+
+  }
+
+
+  if (codeIndex !== -1) {
+
+    generatedCodes[codeIndex].usesLeft--;
+
+    saveCodes();
+
+  }
 
 
   articles.push({
 
-    id: Date.now(),
+    id:
+      Date.now(),
 
-    title: title,
+    title,
 
-    text: text,
+    category,
 
-    category: category,
+    author:
+      author || "Okänd",
+
+    text,
 
     date:
-      new Date()
-        .toLocaleString("sv-SE")
+      new Date().toLocaleDateString("sv-SE")
 
   });
 
 
-  saveArticles(articles);
-
-
-  document
-    .getElementById("title")
-    .value = "";
-
+  saveArticles();
 
   document
-    .getElementById("text")
+    .getElementById("writeCode")
     .value = "";
 
+  document
+    .getElementById("articleTitle")
+    .value = "";
+
+  document
+    .getElementById("articleAuthor")
+    .value = "";
+
+  document
+    .getElementById("articleText")
+    .value = "";
 
   closeModals();
 
-  showHome();
+  renderArticles();
 
-
-  alert(
-    "📰 Artikeln är publicerad!"
-  );
-
+  alert("Artikeln är publicerad! 📰");
 }
 
 
-/* ================================
+/* =====================================================
    RADERA
-================================ */
+===================================================== */
 
-function openDelete() {
+function openDeleteModal() {
 
   document
     .getElementById("deleteModal")
-    .classList.add("show");
-
-
-  document
-    .getElementById("deleteCode")
-    .value = "";
-
+    .classList.add("active");
 
   document
     .getElementById("deleteList")
@@ -1169,37 +1109,29 @@ function openDelete() {
 }
 
 
-function checkDeleteCode() {
+function unlockDelete() {
 
   const code =
     document
       .getElementById("deleteCode")
-      .value;
+      .value
+      .trim();
 
+  if (code !== "2121") {
 
-  if (code !== DELETE_CODE) {
-
-    alert("❌ Fel kod!");
+    alert("Fel kod.");
 
     return;
   }
 
-
   showDeleteList();
-
 }
 
 
 function showDeleteList() {
 
   const list =
-    document
-      .getElementById("deleteList");
-
-
-  const articles =
-    getArticles();
-
+    document.getElementById("deleteList");
 
   if (articles.length === 0) {
 
@@ -1211,98 +1143,819 @@ function showDeleteList() {
 
 
   list.innerHTML =
-    "<h3>Välj artikel:</h3>";
+    articles
+      .slice()
+      .reverse()
+      .map(article => `
+
+        <div class="code-row">
+
+          <span>
+            ${escapeHTML(article.title)}
+          </span>
+
+          <button
+            onclick="deleteArticle(${article.id})">
+            🗑️ Radera
+          </button>
+
+        </div>
+
+      `)
+      .join("");
+}
 
 
-  articles
-    .slice()
-    .reverse()
-    .forEach(article => {
+function deleteArticle(id) {
 
-      const button =
-        document.createElement("button");
+  const article =
+    articles.find(
+      item => item.id === id
+    );
 
-
-      button.className =
-        "deleteArticleButton";
+  if (!article) return;
 
 
-      button.textContent =
-        "🗑️ " + article.title;
+  const confirmed =
+    confirm(
+      'Vill du verkligen radera "' +
+      article.title +
+      '"?'
+    );
+
+  if (!confirmed) return;
 
 
-      button.onclick =
-        () => deleteArticle(article.id);
+  articles =
+    articles.filter(
+      item => item.id !== id
+    );
+
+  saveArticles();
+
+  showDeleteList();
+
+  renderArticles();
+}
 
 
-      list.appendChild(button);
+/* =====================================================
+   KODER
+===================================================== */
+
+function openCodeManager() {
+
+  document
+    .getElementById("codeModal")
+    .classList.add("active");
+
+  document
+    .getElementById("codeManagerContent")
+    .innerHTML = "";
+
+}
+
+
+function unlockCodes() {
+
+  const code =
+    document
+      .getElementById("adminCode")
+      .value
+      .trim();
+
+  if (code !== "3434") {
+
+    alert("Fel admin-kod.");
+
+    return;
+  }
+
+  showCodeManager();
+}
+
+
+function showCodeManager() {
+
+  const content =
+    document.getElementById(
+      "codeManagerContent"
+    );
+
+
+  let codeList = "";
+
+  if (generatedCodes.length === 0) {
+
+    codeList =
+      "<p>Inga skapade koder.</p>";
+
+  } else {
+
+    codeList =
+      generatedCodes
+        .map((item, index) => `
+
+          <div class="code-row">
+
+            <span>
+              <strong>${escapeHTML(item.code)}</strong>
+              — ${item.usesLeft} användningar kvar
+            </span>
+
+            <button
+              onclick="deleteGeneratedCode(${index})">
+              🗑️
+            </button>
+
+          </div>
+
+        `)
+        .join("");
+
+  }
+
+
+  content.innerHTML = `
+
+    <hr>
+
+    <h3>➕ Skapa ny kod</h3>
+
+    <input
+      type="text"
+      id="newCode"
+      placeholder="Valfri kod"
+    >
+
+    <input
+      type="number"
+      id="newCodeUses"
+      placeholder="Antal användningar"
+      min="1"
+      max="1000"
+    >
+
+    <button
+      class="primary"
+      onclick="createCode()">
+      Skapa kod
+    </button>
+
+    <h3>📋 Skapade koder</h3>
+
+    ${codeList}
+
+  `;
+}
+
+
+function createCode() {
+
+  const code =
+    document
+      .getElementById("newCode")
+      .value
+      .trim();
+
+  const uses =
+    Number(
+      document
+        .getElementById("newCodeUses")
+        .value
+    );
+
+
+  if (!code) {
+
+    alert("Skriv en kod.");
+
+    return;
+  }
+
+
+  if (
+    !Number.isInteger(uses) ||
+    uses < 1 ||
+    uses > 1000
+  ) {
+
+    alert(
+      "Antalet användningar måste vara mellan 1 och 1000."
+    );
+
+    return;
+  }
+
+
+  const reserved =
+    ["1717", "2121", "3434"];
+
+
+  if (reserved.includes(code)) {
+
+    alert("Den koden är reserverad.");
+
+    return;
+  }
+
+
+  if (
+    generatedCodes.some(
+      item => item.code === code
+    )
+  ) {
+
+    alert("Den koden finns redan.");
+
+    return;
+  }
+
+
+  generatedCodes.push({
+
+    code,
+
+    usesLeft:
+      uses,
+
+    created:
+      new Date().toISOString()
+
+  });
+
+
+  saveCodes();
+
+  showCodeManager();
+
+  alert("Koden skapades! 🔐");
+}
+
+
+function deleteGeneratedCode(index) {
+
+  const confirmed =
+    confirm(
+      "Vill du radera den här koden?"
+    );
+
+  if (!confirmed) return;
+
+
+  generatedCodes.splice(index, 1);
+
+  saveCodes();
+
+  showCodeManager();
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+function closeModals() {
+
+  document
+    .querySelectorAll(".modal")
+    .forEach(modal => {
+
+      modal.classList.remove("active");
 
     });
 
 }
 
 
-function deleteArticle(id) {
+/* =====================================================
+   SPINNING WHEEL
+===================================================== */
 
-  if (
-    !confirm(
-      "Vill du verkligen radera artikeln?"
+let wheelOptions =
+  JSON.parse(
+    localStorage.getItem(
+      "charlieWheelOptions"
     )
-  ) {
+  ) || [
+    "Minecraft",
+    "Roblox",
+    "Fotboll",
+    "Cykla"
+  ];
+
+
+let wheelRotation = 0;
+
+let spinning = false;
+
+
+const wheelCanvas =
+  document.getElementById(
+    "wheelCanvas"
+  );
+
+const wheelCtx =
+  wheelCanvas.getContext("2d");
+
+
+function saveWheelOptions() {
+
+  localStorage.setItem(
+    "charlieWheelOptions",
+    JSON.stringify(wheelOptions)
+  );
+
+}
+
+
+function drawWheel() {
+
+  const centerX = 250;
+  const centerY = 250;
+  const radius = 230;
+
+
+  wheelCtx.clearRect(
+    0,
+    0,
+    500,
+    500
+  );
+
+
+  if (wheelOptions.length === 0) {
+
+    wheelCtx.beginPath();
+
+    wheelCtx.arc(
+      centerX,
+      centerY,
+      radius,
+      0,
+      Math.PI * 2
+    );
+
+    wheelCtx.fillStyle =
+      "#eeeeee";
+
+    wheelCtx.fill();
+
+    wheelCtx.fillStyle =
+      "#555";
+
+    wheelCtx.font =
+      "bold 24px Arial";
+
+    wheelCtx.textAlign =
+      "center";
+
+    wheelCtx.fillText(
+      "Lägg till alternativ!",
+      centerX,
+      centerY
+    );
+
+    return;
+  }
+
+
+  const slice =
+    (Math.PI * 2) /
+    wheelOptions.length;
+
+
+  wheelOptions.forEach(
+    (option, i) => {
+
+      const start =
+        wheelRotation +
+        i * slice;
+
+      const end =
+        start + slice;
+
+
+      wheelCtx.beginPath();
+
+      wheelCtx.moveTo(
+        centerX,
+        centerY
+      );
+
+      wheelCtx.arc(
+        centerX,
+        centerY,
+        radius,
+        start,
+        end
+      );
+
+      wheelCtx.closePath();
+
+
+      wheelCtx.fillStyle =
+        `hsl(${i * 360 / wheelOptions.length}, 75%, 60%)`;
+
+      wheelCtx.fill();
+
+
+      wheelCtx.strokeStyle =
+        "#ffffff";
+
+      wheelCtx.lineWidth = 3;
+
+      wheelCtx.stroke();
+
+
+      wheelCtx.save();
+
+      wheelCtx.translate(
+        centerX,
+        centerY
+      );
+
+      wheelCtx.rotate(
+        start + slice / 2
+      );
+
+
+      wheelCtx.fillStyle =
+        "#111";
+
+      wheelCtx.font =
+        "bold 18px Arial";
+
+      wheelCtx.textAlign =
+        "right";
+
+
+      let text = option;
+
+      if (text.length > 18) {
+
+        text =
+          text.substring(0, 18) +
+          "...";
+
+      }
+
+
+      wheelCtx.fillText(
+        text,
+        radius - 20,
+        6
+      );
+
+
+      wheelCtx.restore();
+
+    }
+  );
+
+
+  wheelCtx.beginPath();
+
+  wheelCtx.arc(
+    centerX,
+    centerY,
+    35,
+    0,
+    Math.PI * 2
+  );
+
+  wheelCtx.fillStyle =
+    "white";
+
+  wheelCtx.fill();
+
+  wheelCtx.strokeStyle =
+    "#222";
+
+  wheelCtx.lineWidth = 3;
+
+  wheelCtx.stroke();
+
+}
+
+
+function addOption() {
+
+  const input =
+    document.getElementById(
+      "optionInput"
+    );
+
+  const value =
+    input.value.trim();
+
+
+  if (!value) return;
+
+
+  wheelOptions.push(value);
+
+  saveWheelOptions();
+
+  input.value = "";
+
+  updateOptionList();
+
+  drawWheel();
+
+}
+
+
+function removeOption(index) {
+
+  wheelOptions.splice(
+    index,
+    1
+  );
+
+  saveWheelOptions();
+
+  updateOptionList();
+
+  drawWheel();
+
+}
+
+
+function clearOptions() {
+
+  wheelOptions = [];
+
+  saveWheelOptions();
+
+  updateOptionList();
+
+  drawWheel();
+
+  document
+    .getElementById("wheelResult")
+    .textContent =
+    "Lägg till några alternativ!";
+
+}
+
+
+function updateOptionList() {
+
+  const list =
+    document.getElementById(
+      "optionList"
+    );
+
+  list.innerHTML = "";
+
+
+  wheelOptions.forEach(
+    (option, index) => {
+
+      const item =
+        document.createElement("div");
+
+      item.className =
+        "option-item";
+
+
+      const text =
+        document.createElement("span");
+
+      text.textContent =
+        option;
+
+
+      const button =
+        document.createElement("button");
+
+      button.textContent =
+        "❌";
+
+
+      button.onclick =
+        () => removeOption(index);
+
+
+      item.appendChild(text);
+
+      item.appendChild(button);
+
+      list.appendChild(item);
+
+    }
+  );
+
+}
+
+
+function spinWheel() {
+
+  if (spinning) return;
+
+
+  if (wheelOptions.length < 2) {
+
+    document
+      .getElementById("wheelResult")
+      .textContent =
+      "Lägg till minst 2 alternativ!";
 
     return;
 
   }
 
 
-  const articles =
-    getArticles();
+  spinning = true;
 
 
-  const newArticles =
-    articles.filter(
-      article => article.id !== id
+  const button =
+    document.getElementById(
+      "spinButton"
     );
 
-
-  saveArticles(newArticles);
-
-
-  showDeleteList();
-
-  showHome();
+  button.disabled = true;
 
 
-  alert(
-    "🗑️ Artikeln är raderad!"
+  document
+    .getElementById("wheelResult")
+    .textContent =
+    "🎡 Snurrar...";
+
+
+  const startRotation =
+    wheelRotation;
+
+
+  const extraSpins =
+    5 + Math.random() * 4;
+
+
+  const randomAngle =
+    Math.random() *
+    Math.PI * 2;
+
+
+  const targetRotation =
+    startRotation +
+    extraSpins * Math.PI * 2 +
+    randomAngle;
+
+
+  const duration =
+    4500;
+
+
+  const startTime =
+    performance.now();
+
+
+  function animate(currentTime) {
+
+    const elapsed =
+      currentTime - startTime;
+
+
+    const progress =
+      Math.min(
+        elapsed / duration,
+        1
+      );
+
+
+    const eased =
+      1 -
+      Math.pow(
+        1 - progress,
+        4
+      );
+
+
+    wheelRotation =
+      startRotation +
+      (targetRotation -
+       startRotation) *
+      eased;
+
+
+    drawWheel();
+
+
+    if (progress < 1) {
+
+      requestAnimationFrame(
+        animate
+      );
+
+    } else {
+
+      wheelRotation =
+        wheelRotation %
+        (Math.PI * 2);
+
+
+      showWinner();
+
+
+      spinning = false;
+
+      button.disabled =
+        false;
+
+    }
+
+  }
+
+
+  requestAnimationFrame(
+    animate
   );
 
 }
 
 
-/* ================================
-   STÄNG
-================================ */
+function showWinner() {
 
-function closeModals() {
-
-  document
-    .getElementById("addModal")
-    .classList.remove("show");
+  const count =
+    wheelOptions.length;
 
 
-  document
-    .getElementById("deleteModal")
-    .classList.remove("show");
+  const slice =
+    (Math.PI * 2) /
+    count;
+
+
+  let angle =
+    (
+      -Math.PI / 2 -
+      wheelRotation
+    ) %
+    (Math.PI * 2);
+
+
+  if (angle < 0) {
+
+    angle +=
+      Math.PI * 2;
+
+  }
+
+
+  const index =
+    Math.floor(
+      angle / slice
+    );
+
+
+  const winner =
+    wheelOptions[index];
+
+
+  const result =
+    document.getElementById(
+      "wheelResult"
+    );
+
+
+  result.textContent =
+    "🎉 Det blev: " +
+    winner + "!";
 
 }
 
 
-/* ================================
-   START
-================================ */
+/* =====================================================
+   ENTER PÅ HJULET
+===================================================== */
 
-showHome();
+document
+  .getElementById("optionInput")
+  .addEventListener(
+    "keydown",
+    function(event) {
+
+      if (event.key === "Enter") {
+
+        event.preventDefault();
+
+        addOption();
+
+      }
+
+    }
+  );
+
+
+/* =====================================================
+   START
+===================================================== */
+
+renderArticles();
+
+updateOptionList();
+
+drawWheel();
 
 </script>
 
